@@ -5,7 +5,6 @@ import 'package:wordmedia/base/resizer/fetch_pixels.dart';
 import 'package:wordmedia/models/login_model.dart';
 import 'package:wordmedia/services/login_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../base/constant.dart';
 import '../../routes/app_routes.dart';
 
 class LoginScreen extends StatefulWidget {

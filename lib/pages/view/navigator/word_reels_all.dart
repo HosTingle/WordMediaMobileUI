@@ -29,7 +29,7 @@ class _WordReelAllScreenState extends State<WordReelAllScreen> {
   @override
   Widget build(BuildContext context) {
     PageController controller=PageController(initialPage: 0);
-    if(wordList!.isEmpty){
+    if(wordList.isEmpty){
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -43,7 +43,7 @@ class _WordReelAllScreenState extends State<WordReelAllScreen> {
           child: PageView.builder(
             scrollDirection: Axis.vertical,
             physics: dondumu ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
-            itemCount: wordList?.length,
+            itemCount: wordList.length,
             controller: controller,
             onPageChanged: (_){
               setState(() {
@@ -54,9 +54,9 @@ class _WordReelAllScreenState extends State<WordReelAllScreen> {
             itemBuilder: (BuildContext context, int index) {
               return WordPage(
                 colora: index.isEven ? Colors.white : Colors.blue,
-                firstword: wordList?[index].word,
-                secondword: wordList?[index].wordtranslate,
-                sentence: wordList?[index].sentence,
+                firstword: wordList[index].word,
+                secondword: wordList[index].wordtranslate,
+                sentence: wordList[index].sentence,
                 flipto: flipto,
                 flip: (status) {
                   setState(() {
@@ -108,7 +108,7 @@ class WordPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(firstword!, style: Theme.of(context).textTheme.headline1,textAlign: TextAlign.center,),
+              Text(firstword!, style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
             ],
           ),
         ),
@@ -117,7 +117,7 @@ class WordPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(secondword!, style: Theme.of(context).textTheme.headline1,textAlign: TextAlign.center,),
+              Text(secondword!, style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
               Text(sentence != null ? sentence! :" ",textAlign: TextAlign.center,),
             ],
           ),

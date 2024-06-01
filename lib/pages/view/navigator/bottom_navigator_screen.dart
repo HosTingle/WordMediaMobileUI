@@ -31,7 +31,7 @@ class _BottomNavigatorsState extends State<BottomNavigators> {
   Widget build(BuildContext context) {
     final message = ModalRoute.of(context)?.settings.arguments as String?;
     if(message!=null){
-      Map<String, dynamic> decodedToken = JwtDecoder.decode(message!);
+      Map<String, dynamic> decodedToken = JwtDecoder.decode(message);
       print(decodedToken["Username"]);
       print(decodedToken["UserId"]);
     }

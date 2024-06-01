@@ -29,7 +29,7 @@ class _WordReelScreenState extends State<WordReelScreen> {
   @override
   Widget build(BuildContext context) {
     PageController controller=PageController(initialPage: 0);
-    if(wordList!.isEmpty){
+    if(wordList.isEmpty){
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -43,7 +43,7 @@ class _WordReelScreenState extends State<WordReelScreen> {
           child: PageView.builder(
             scrollDirection: Axis.vertical,
             physics: dondumu ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
-            itemCount: wordList?.length,
+            itemCount: wordList.length,
             controller: controller,
             onPageChanged: (_){
               setState(() {
@@ -54,9 +54,9 @@ class _WordReelScreenState extends State<WordReelScreen> {
             itemBuilder: (BuildContext context, int index) {
               return WordPage(
                 colora: index.isEven ? Colors.white : Colors.blue,
-                firstword: wordList?[index].word,
-                secondword: wordList?[index].wordtranslate,
-                sentence: wordList?[index].sentence,
+                firstword: wordList[index].word,
+                secondword: wordList[index].wordtranslate,
+                sentence: wordList[index].sentence,
                 flipto: flipto,
                 flip: (status) {
                   setState(() {
