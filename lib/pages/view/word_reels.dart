@@ -108,7 +108,7 @@ class WordPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(firstword!, style: Theme.of(context).textTheme.headline1,textAlign: TextAlign.center,),
+              Text(firstword!, style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
             ],
           ),
         ),
@@ -117,7 +117,7 @@ class WordPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(secondword!, style: Theme.of(context).textTheme.headline1,textAlign: TextAlign.center,),
+              Text(secondword!, style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
               Text(sentence != null ? sentence! :" ",textAlign: TextAlign.center,),
             ],
           ),
