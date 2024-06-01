@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wordmedia/base/resizer/fetch_pixels.dart';
 import 'package:wordmedia/pages/view/navigator/profile_screen.dart';
 import '../../../base/color_data.dart';
+import '../../../base/constant.dart';
+import '../../routes/app_routes.dart';
 import 'home_screen.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 class BottomNavigators extends StatefulWidget {
@@ -46,7 +48,7 @@ class _BottomNavigatorsState extends State<BottomNavigators> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: blueColor,
         onPressed: () {
-          // Butona basıldığında gerçekleşecek işlemi belirtin
+          Constant.sendToNext(context, Routes.wordreelallRoute);
         },
         shape: const CircleBorder(),
         child: ClipOval(

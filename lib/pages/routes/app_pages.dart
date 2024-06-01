@@ -4,6 +4,7 @@ import '../view/login/initial_screen.dart';
 import '../view/login/login_screen.dart';
 import '../view/login/register_screen.dart';
 import '../view/navigator/bottom_navigator_screen.dart';
+import '../view/navigator/word_reels_all.dart';
 import '../view/word_reels.dart';
 import 'app_routes.dart';
 
@@ -15,6 +16,7 @@ class AppPages extends ChangeNotifier {
      Routes.registerRoute: (context) => const RegisterScreen(),
      Routes.navigatorRoute:(context)=>BottomNavigators(),
      Routes.wordreelRoute:(context)=>const WordReelScreen(),
-     Routes.splashRoute:(context)=>SplashScreen()
+     Routes.splashRoute:(context)=>SplashScreen(),
+   Routes.wordreelallRoute:(context)=>WordReelAllScreen(),
   };
 }

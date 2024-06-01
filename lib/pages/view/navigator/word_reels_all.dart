@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:wordmedia/base/color_data.dart';
 import 'package:wordmedia/base/resizer/fetch_pixels.dart';
 import 'package:flip_card/flip_card.dart';
-import '../../models/word_model.dart';
-import '../../provider/reels_provider.dart';
+import '../../../models/word_model.dart';
+import '../../../provider/reels_provider.dart';
 import 'package:provider/provider.dart';
-class WordReelScreen extends StatefulWidget {
-  const WordReelScreen({super.key});
+class WordReelAllScreen extends StatefulWidget {
+  const WordReelAllScreen({super.key});
 
   @override
-  State<WordReelScreen> createState() => _WordReelScreenState();
+  State<WordReelAllScreen> createState() => _WordReelAllScreenState();
 }
 
-class _WordReelScreenState extends State<WordReelScreen> {
+class _WordReelAllScreenState extends State<WordReelAllScreen> {
   bool dondumu=false;
   bool flipto=true;
   List<Word> wordList=[];
@@ -24,7 +24,7 @@ class _WordReelScreenState extends State<WordReelScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    wordList=Provider.of<ReelsProvider>(context, listen: true).words!;
+    wordList=Provider.of<ReelsProvider>(context, listen: true).allwords!;
   }
   @override
   Widget build(BuildContext context) {

@@ -8,10 +8,12 @@ class ReelsProvider extends ChangeNotifier {
   WordService wordService=WordService();
   Word? word;
   List<Word>? _words = [];
-
+  List<Word>? _allwords = [];
   List<Word>? get words => _words;
+  List<Word>? get allwords => _allwords;
   ReelsProvider() {
     fetchuserWords();
+    fetchallWords();
   }
   void fetchuserWords() async{
     final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
@@ -22,6 +24,11 @@ class ReelsProvider extends ChangeNotifier {
     else{
       word= _words?.last;
     }
+    notifyListeners();
+  }
+  void fetchallWords() async{
+    _allwords=await wordService.fetchallwords();
+
     notifyListeners();
   }
 }

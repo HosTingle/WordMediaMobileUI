@@ -5,6 +5,7 @@ abstract class Routes{
   static const navigatorRoute=Paths.navigatorPath;
   static const wordreelRoute=Paths.wordreelsPath;
   static const splashRoute=Paths.splashPath;
+  static const wordreelallRoute=Paths.wordreelallPath;
 }
 abstract class Paths {
   static const initialPath = "/";
@@ -13,5 +14,5 @@ abstract class Paths {
   static const navigatorPath="/NavigatorScreen";
   static const wordreelsPath="/WordReelScreen";
   static const splashPath="/SplashScreen";
-
+  static const wordreelallPath="/WordReelAllScreen";
 }
