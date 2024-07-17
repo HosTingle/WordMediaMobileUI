@@ -5,6 +5,7 @@ import 'package:flip_card/flip_card.dart';
 import '../../models/word_model.dart';
 import '../../provider/reels_provider.dart';
 import 'package:provider/provider.dart';
+
 class WordReelScreen extends StatefulWidget {
   const WordReelScreen({super.key});
 
@@ -13,64 +14,68 @@ class WordReelScreen extends StatefulWidget {
 }
 
 class _WordReelScreenState extends State<WordReelScreen> {
-  bool dondumu=false;
-  bool flipto=true;
-  List<Word> wordList=[];
+  bool dondumu = false;
+  bool flipto = true;
+  List<Word> wordList = [];
+  PageController controller = PageController(initialPage: 0); // PageController'ı burada üye değişken olarak oluşturun
+
   @override
   void initState() {
     super.initState();
-
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    wordList=Provider.of<ReelsProvider>(context, listen: true).words!;
+    wordList = Provider.of<ReelsProvider>(context, listen: true).words!;
   }
+
   @override
   Widget build(BuildContext context) {
-    PageController controller=PageController(initialPage: 0);
-    if(wordList.isEmpty){
+    if (wordList.isEmpty) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
       );
-    }
-    else{
+    } else {
       return Scaffold(
         body: Container(
           color: blueColor,
           child: PageView.builder(
             scrollDirection: Axis.vertical,
-            physics: dondumu ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
+            physics: dondumu
+                ? AlwaysScrollableScrollPhysics()
+                : NeverScrollableScrollPhysics(),
             itemCount: wordList.length,
             controller: controller,
-            onPageChanged: (_){
+            onPageChanged: (_) {
               setState(() {
-                dondumu=false;
-                flipto=true;
+                dondumu = false;
+                flipto = true;
               });
             },
             itemBuilder: (BuildContext context, int index) {
               return WordPage(
-                colora: index.isEven ? Colors.white : Colors.blue,
+                colora: blueColor,
                 firstword: wordList[index].word,
                 secondword: wordList[index].wordtranslate,
                 sentence: wordList[index].sentence,
                 flipto: flipto,
                 flip: (status) {
                   setState(() {
-                    flipto=false;
+                    flipto = false;
                     dondumu = true;
                   });
                 },
+                pageController: controller, // PageController'ı geçin
+                currentIndex: index, // Mevcut sayfa indeksini geçin
               );
             },
           ),
         ),
       );
     }
-
   }
 }
 
@@ -81,6 +86,8 @@ class WordPage extends StatelessWidget {
   final void Function(bool) flip;
   final bool flipto;
   final String? sentence;
+  final PageController pageController; // PageController'ı alın
+  final int currentIndex; // Mevcut sayfa indeksini alın
 
   const WordPage({
     Key? key,
@@ -88,7 +95,10 @@ class WordPage extends StatelessWidget {
     required this.firstword,
     required this.secondword,
     required this.flip,
-    required this.flipto, this.sentence
+    required this.flipto,
+    required this.pageController, // PageController'ı constructor'a ekleyin
+    required this.currentIndex, // Mevcut sayfa indeksini constructor'a ekleyin
+    this.sentence,
   }) : super(key: key);
 
   @override
@@ -108,7 +118,11 @@ class WordPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(firstword!, style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
+              Text(
+                firstword!,
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
@@ -117,8 +131,62 @@ class WordPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(secondword!, style: Theme.of(context).textTheme.headlineMedium,textAlign: TextAlign.center,),
-              Text(sentence != null ? sentence! :" ",textAlign: TextAlign.center,),
+              Text(
+                secondword!,
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
+              ),
+              Text(
+                sentence != null ? sentence! : " ",
+                textAlign: TextAlign.center,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.close),
+                        iconSize: 50.0, // İkonun boyutunu ayarlar
+                        color: whiteGroundColor, // İkonun rengini ayarlar
+                        onPressed: () {
+                          // Butona tıklandığında çalışacak kod
+                          pageController.nextPage(
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                          print('Butona tıklandı!');
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.done),
+                        iconSize: 50.0, // İkonun boyutunu ayarlar
+                        color: whiteGroundColor, // İkonun rengini ayarlar
+                        onPressed: () {
+                          pageController.nextPage(
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    iconSize: 50.0, // İkonun boyutunu ayarlar
+                    color: whiteGroundColor,
+                    onPressed: () {
+                      // Butona tıklandığında çalışacak kod
+                      pageController.nextPage(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                      print('Butona tıklandı!');
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ),

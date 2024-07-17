@@ -6,11 +6,13 @@ import '../../../base/constant.dart';
 import '../../routes/app_routes.dart';
 import 'home_screen.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+
+import 'notification_screen.dart';
 class BottomNavigators extends StatefulWidget {
   @override
   State<BottomNavigators> createState() => _BottomNavigatorsState();
 }
-var sayfalistesi=[HomeScreen(),ProfileScreen(),HomeScreen(),ProfileScreen()];
+var sayfalistesi=[HomeScreen(),ProfileScreen(),NotificationScreen(),ProfileScreen()];
 
 class _BottomNavigatorsState extends State<BottomNavigators> {
   int? index=0;

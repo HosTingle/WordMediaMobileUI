@@ -68,21 +68,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     text: "Profile",
                     icon: Icons.person_outline,
                     onPressed: (){
-
                     },
                   ),
                   WidthBar(
                     text: "Notification",
                     icon: Icons.notifications_none_outlined,
                     onPressed: (){
-
                     },
                   ),
                   WidthBar(
                     text: "Security",
                     icon: Icons.lock_outline,
                     onPressed: (){
-
                     },
                   )
                 ],
@@ -91,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           Padding(
             padding:  EdgeInsets.only(left: FetchPixels.getPixelWidth(30),),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text("Acces",style: TextStyle(

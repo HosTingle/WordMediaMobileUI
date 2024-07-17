@@ -17,6 +17,6 @@ class AppPages extends ChangeNotifier {
      Routes.navigatorRoute:(context)=>BottomNavigators(),
      Routes.wordreelRoute:(context)=>const WordReelScreen(),
      Routes.splashRoute:(context)=>SplashScreen(),
-   Routes.wordreelallRoute:(context)=>WordReelAllScreen(),
+   Routes.wordreelallRoute:(context)=>const WordReelAllScreen(),
   };
 }

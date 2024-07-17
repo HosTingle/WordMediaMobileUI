@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: greyColor,
-        title: Text("dfn.",style: TextStyle(
+        title: Text("WordMedia.",style: TextStyle(
             fontSize: FetchPixels.getPixelWidth(38),
             fontWeight: FontWeight.bold,
             color: blueColor

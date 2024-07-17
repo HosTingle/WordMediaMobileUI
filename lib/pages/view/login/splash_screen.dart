@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../base/color_data.dart';
+import '../../../base/resizer/fetch_pixels.dart';
 import '../../routes/app_routes.dart';
 class SplashScreen extends StatefulWidget {
   @override
@@ -40,10 +42,24 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-          child: Text("SplashScreen",style: TextStyle(
-            color: Colors.black
-          ),)
-      ),
-    );
+          child: Container(
+            height: FetchPixels.getPixelHeight(180),
+            width: FetchPixels.getPixelHeight(120),
+            child:Column(
+              children: [
+                 Image(
+                  image: AssetImage("images/iconre.png"), // Bu satır, resmi konteynerin boyutlarına göre kırpmak için kullanılır
+                ),
+                SizedBox(height: FetchPixels.getPixelHeight(20),),
+        Text("WordMedia.",style: TextStyle(
+            fontSize: FetchPixels.getPixelWidth(13),
+            fontWeight: FontWeight.bold,
+            color: blueColor
+        )
+        ),
+              ],
+            ),
+          ),),
+      );
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wordmedia/pages/routes/app_pages.dart';
 import 'package:provider/provider.dart';
+import 'package:wordmedia/provider/notification_provider.dart';
 import 'package:wordmedia/provider/reels_provider.dart';
+import 'package:wordmedia/provider/user_provider.dart';
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
@@ -15,7 +17,10 @@ void main()async{
       MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => AppPages()),
-            ChangeNotifierProvider(create: (_) => ReelsProvider())
+            ChangeNotifierProvider(create: (_) => ReelsProvider()),
+            ChangeNotifierProvider(create: (_) => UserProvider()),
+            ChangeNotifierProvider(create: (_) => Notifcationdata())
+
           ],
           child: const MyApp()
       ));

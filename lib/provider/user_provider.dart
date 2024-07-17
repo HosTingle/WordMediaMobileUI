@@ -9,11 +9,15 @@ class UserProvider extends ChangeNotifier{
   User? _user;
   List<User>? _users = [];
 
-  List<User>? get words => _users;
+  List<User>? get users => _users;
   User? get user=>_user;
+  UserProvider() {
+    fetchuserInformation();
+  }
   void fetchuserInformation() async{
     final SharedPreferences sharedPreferences=await SharedPreferences.getInstance();
     String? userid=sharedPreferences.getString("UserId");
+    _user=await userService.fetchuserData(int.parse(userid!));
     /*_user=await userService.fetchuserData(1002);
     if(_words!.isEmpty){
     }

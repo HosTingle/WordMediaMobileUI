@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wordmedia/base/color_data.dart';
 import 'package:wordmedia/base/resizer/fetch_pixels.dart';
+import 'package:wordmedia/provider/user_provider.dart';
 import '../../../base/constant.dart';
+import '../../../models/user_model.dart';
 import '../../routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:provider/provider.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -19,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? token;
   String? username;
   String? userid;
+  User? user;
   @override
   void initState() {
     // TODO: implement initState
@@ -34,13 +38,18 @@ class _HomeScreenState extends State<HomeScreen> {
     username=decodedToken["Username"];
     prefs?.setString('Username', username!);
     prefs?.setString('UserId', userid!);
-    setState(() {
 
-    });
+
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    user=Provider.of<UserProvider>(context, listen: true).user;
+
   }
   @override
   Widget build(BuildContext context) {
-    if(username==null){
+    if(user?.learned==null){
       return Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -64,32 +73,18 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Column(
                 children: [
-                  SizedBox(height: FetchPixels.getPixelHeight(20),),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    width: MediaQuery.of(context).size.height * 0.08,
-                    child: ClipOval(
-                      child: Image(
-                        image: AssetImage("images/okanfa.jpeg"),
-                        fit: BoxFit.cover, // Bu satır, resmi konteynerin boyutlarına göre kırpmak için kullanılır
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: FetchPixels.getPixelHeight(10),),
-                  Text( username!,style: TextStyle(
-                      fontWeight: FontWeight.bold,fontSize: 10
-                  ),),
-                  Text("Words Data",style: TextStyle(
+                  SizedBox(height: FetchPixels.getPixelHeight(80),),
+                  Text("Words İnformation",style: TextStyle(
                       fontWeight: FontWeight.bold
                   ),),
-                  SizedBox(height: FetchPixels.getPixelHeight(20),),
+                  SizedBox(height: FetchPixels.getPixelHeight(40),),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Column(
                         children: [
-                          Text("12",style: TextStyle(
+                          Text(user!.learnword.toString(),style: TextStyle(
                               fontSize: FetchPixels.getPixelWidth(20)
                           ),),
                           Text("Learn",style: TextStyle(
@@ -99,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Column(
                         children: [
-                          Text("21",style: TextStyle(
+                          Text(user!.knowword.toString(),style: TextStyle(
                               fontSize: FetchPixels.getPixelWidth(20)
                           ),),
                           Text("Know",style: TextStyle(
@@ -109,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Column(
                         children: [
-                          Text("57",style: TextStyle(
+                          Text(user!.learned.toString(),style: TextStyle(
                               fontSize: FetchPixels.getPixelWidth(20)
                           ),),
                           Text("Learned",style: TextStyle(
@@ -154,9 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      CardContainer(),
-                      CardContainer(),
-                      CardContainer(),
+                      CardContainer(text1: "Spent Time",text2: "0",),
+                      CardContainer(text1: "Total Words ",text2: "0",),
+                      CardContainer(text1: "Weekly login",text2: "0",),
                     ],
                   )
                 ],
@@ -171,8 +166,11 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class CardContainer extends StatelessWidget {
+  final String text1;
+  final String text2;
   const CardContainer({
     super.key,
+  required this.text1, required this.text2,
   });
 
   @override
@@ -183,6 +181,18 @@ class CardContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: blueColor, // Arka plan rengini buradan ayarlayabilirsiniz
         borderRadius: BorderRadius.circular(12.0), // Köşe yuvarlatma derecesi
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(text1,style: TextStyle(
+            color: whiteGroundColor
+          ),),
+          Text(text2,style: TextStyle(
+              color: whiteGroundColor
+          ),),
+        ],
       ),
 
     );

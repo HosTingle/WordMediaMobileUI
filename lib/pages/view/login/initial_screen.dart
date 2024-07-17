@@ -52,8 +52,8 @@ class _InitialScreenState extends State<InitialScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text("dfn.",style: TextStyle(
-                      fontSize: FetchPixels.getPixelWidth(100),
+                  Text("WordMedia.",style: TextStyle(
+                      fontSize: FetchPixels.getPixelWidth(60),
                       fontWeight: FontWeight.bold,
                       color: blueColor
                   ),),
